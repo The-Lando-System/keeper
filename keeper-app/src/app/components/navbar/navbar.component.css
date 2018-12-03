@@ -1,0 +1,13 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.app-title {
+  margin-left: 10px;
+  cursor: pointer;
+  outline: 0;
+}
+
+.mat-toolbar-single-row {
+  height: 64px!important;
+}
