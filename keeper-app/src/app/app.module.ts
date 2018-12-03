@@ -12,6 +12,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { AuthService } from './services/auth.service';
+import { Broadcaster } from './services/broadcaster';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +30,10 @@ import { LoginComponent } from './components/login/login.component';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    Broadcaster
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

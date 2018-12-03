@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Broadcaster } from './broadcaster';
 import { Globals } from '../globals';
-import 'rxjs/add/operator/toPromise';
 
 declare const gapi: any;
 
