@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService, User } from '../../services/auth.service';
 
 @Component({
@@ -13,10 +13,18 @@ export class LoginComponent {
     private authService: AuthService
   ){}
 
+  ngOnInit(): void {
+    this.user = this.authService.getUser();
+  }
+
   login(): void {
     this.authService.login()
     .then(() => {
       this.user = this.authService.getUser();
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

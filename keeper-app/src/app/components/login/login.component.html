@@ -1,8 +1,22 @@
 <div id="login">
-  <div class="row">
-    <h4>Authenticate with Google</h4>
+  
+  <!-- Logged Out -->
+  <div *ngIf="!user">
+    <div class="row">
+      <h4>Authenticate with Google</h4>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+    </div>
   </div>
-  <div class="row">
-    <button mat-raised-button color="primary" (click)="login()">Login</button>
+
+  <!-- Logged In -->
+  <div *ngIf="user">
+    <div class="row">
+      <h4>Welcome {{user.name}}!</h4>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    </div>
   </div>
 </div>
