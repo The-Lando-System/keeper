@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeeperApi.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,9 +15,12 @@ namespace KeeperApi.Controllers
     {
         [Route("")]
         [HttpGet]
-        public IEnumerable<string> Get()
+        [AuthFilter]
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            string userEmail = Request.Headers.GetValues(Constants.UserEmailHeader).FirstOrDefault();
+
+            return Ok(userEmail);
         }
       
     }
