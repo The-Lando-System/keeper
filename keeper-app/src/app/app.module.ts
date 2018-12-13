@@ -10,10 +10,12 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
 
 import { AuthService } from './services/auth.service';
 import { Broadcaster } from './services/broadcaster';
+import { RequestService } from './services/request.service';
+
+import { NotesService } from './services/notes.service';
 
 import { StartupService } from './services/startup.service';
 
@@ -25,8 +27,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,8 @@ export function startupServiceFactory(startupService: StartupService): Function 
     AuthService,
     Broadcaster,
     StartupService,
+    RequestService,
+    NotesService,
     {
       provide: APP_INITIALIZER,
       useFactory: startupServiceFactory,

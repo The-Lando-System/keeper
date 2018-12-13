@@ -1,4 +1,13 @@
 <mat-toolbar class="top-toolbar">
   <h1 class="app-title" routerLink="/">Keeper</h1>
   <span class="spacer"></span>
+  <div *ngIf="!user">
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
+  </div>
+  <div *ngIf="user">
+    <h4>{{user.name}}</h4>
+  </div>
+  <div *ngIf="user"  id="logout-button">
+    <button mat-raised-button (click)="logout()">Logout</button>
+  </div>
 </mat-toolbar>

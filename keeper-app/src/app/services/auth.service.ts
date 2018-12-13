@@ -106,7 +106,7 @@ export class AuthService {
   createAuthHeaders(): HttpHeaders {
     return new HttpHeaders ({
       'Content-Type'   : 'application/json',
-      'x-access-token' : this.getAccessToken()
+      'x-id-token' : this.getIdToken()
     });
   }
 

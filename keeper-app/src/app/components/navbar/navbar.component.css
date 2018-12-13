@@ -11,3 +11,7 @@
 .mat-toolbar-single-row {
   height: 64px!important;
 }
+
+#logout-button {
+  margin-left: 20px;
+}
