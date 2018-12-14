@@ -10,6 +10,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { NoteComponent } from './components/note/note.component';
 
 import { AuthService } from './services/auth.service';
 import { Broadcaster } from './services/broadcaster';
@@ -27,7 +28,8 @@ export function startupServiceFactory(startupService: StartupService): Function 
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    NoteComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { NotesService, Note } from '../../services/notes.service';
 export class NoteComponent implements OnInit {
 
   private user: User;
-  private note: Note;
+  private note: Note = new Note();
   private editMode: boolean = false;
 
   constructor(
@@ -60,11 +60,20 @@ export class NoteComponent implements OnInit {
 
   }
 
-  deleteNote(): void {
-    this.notesService.deleteNote(this.note.id)
-    .then(() => {
+  cancelOrDeleteNote(): void {
+
+    if (this.editMode) {
+      if (!confirm("Are you sure you want to delete this note?")){
+        return;
+      }
+      this.notesService.deleteNote(this.note.Id)
+      .then(() => {
+        this.router.navigate(['/']);
+      });
+    } else {
       this.router.navigate(['/']);
-    });
+    }
+
   }
 
 }

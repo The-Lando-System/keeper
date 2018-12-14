@@ -39,10 +39,10 @@ export class NotesService implements OnInit {
 
 export class Note {
 
-  public id: string;
-  public lastModified: Date;
+  public Id: string;
+  public LastModified: Date;
 
-  public title: string;
-  public content: string;
+  public Title: string;
+  public Content: string;
 
 }
