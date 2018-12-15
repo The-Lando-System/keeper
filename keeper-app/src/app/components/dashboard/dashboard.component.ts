@@ -44,8 +44,28 @@ export class DashboardComponent implements OnInit {
     }
 
     this.filteredNotes = this.notes.filter(note => {
-      return note.Content.toLowerCase().includes(this.filterTerm.toLowerCase()) ||
-        note.Title.toLowerCase().includes(this.filterTerm.toLowerCase());
+
+      let term = this.filterTerm.toLowerCase();
+      
+      let title = note.Title ? note.Title.toLowerCase() : '';
+      let content = note.Content ? note.Content.toLowerCase() : '';
+
+      return title.includes(term) || content.includes(term);
     });
   }
+
+  deleteNote(note:Note): void {
+
+    if (!confirm("Are you sure you want to delete this note?")){
+      return;
+    }
+
+    this.notesService.deleteNote(note.Id)
+    .then(() => {
+      this.getNotes();
+      this.filterTerm = '';
+    });
+
+  }
+
 }

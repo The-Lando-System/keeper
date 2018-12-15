@@ -3,10 +3,25 @@
 }
 
 #note-filter {
-  margin-right: 20px;
   width: 300px;
 }
 
 .note-card {
   margin-top: 20px;
+}
+
+.note-card > mat-card > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-card > mat-card > div > mat-card-header {
+  height: 200px;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.command-row {
+  display: flex;
+  justify-content: space-between;
 }

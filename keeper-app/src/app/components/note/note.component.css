@@ -5,3 +5,7 @@
 #save-note-button {
   float: right;
 }
+
+#note-editor-container {
+  margin-top:20px;
+}
