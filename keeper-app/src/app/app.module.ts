@@ -10,6 +10,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NoteComponent } from './components/note/note.component';
 
 import { AuthService } from './services/auth.service';
@@ -29,6 +30,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    DashboardComponent,
     NoteComponent
   ],
   imports: [

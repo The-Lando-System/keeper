@@ -39,7 +39,7 @@ namespace KeeperApi.Controllers
         public IHttpActionResult GetAllNotes()
         {
             string userEmail = Request.Headers.GetValues(Constants.UserEmailHeader).FirstOrDefault();
-            return Ok(notesRepository.FindByProperty("Email", userEmail));
+            return Ok(notesRepository.FindAllByProperty(new Dictionary<string, string>{{ "Email", userEmail }}));
         }
 
         [Route("")]

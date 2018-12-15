@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, User } from '../../services/auth.service';
+import { Broadcaster } from 'src/app/services/broadcaster';
 
 @Component({
   selector: 'my-navbar',
@@ -11,7 +12,8 @@ export class NavbarComponent implements OnInit {
   private user: User;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private broadcaster: Broadcaster
   ){}
 
   ngOnInit(): void {
@@ -22,6 +24,7 @@ export class NavbarComponent implements OnInit {
     this.authService.login()
     .then(() => {
       this.user = this.authService.getUser();
+      this.broadcaster.broadcast('LOGIN', true);
     });
   }
 

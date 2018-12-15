@@ -1,0 +1,28 @@
+<!-- Create Note -->
+<div class="row">
+  <div class="col">
+    <mat-form-field id="note-filter">
+      <input matInput placeholder="Search" [(ngModel)]="filterTerm" (keyup)="filterNotes()">
+    </mat-form-field>
+    <button id="new-note-button" mat-raised-button color="primary" [routerLink]="['note/new']">New Note</button>
+  </div>
+</div>
+
+<hr/>
+
+<!-- List of Notes -->
+<div id="list-of-notes" class="row">
+  <div class="col-md-3 note-card" *ngFor="let note of filteredNotes">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{note.Title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{note.Content}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button [routerLink]="['note/', note.Id]">View</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
