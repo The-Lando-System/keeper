@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Globals } from '../globals';
+import { environment } from 'src/environments/environment';
 
 declare const gapi: any;
 
 @Injectable()
 export class AuthService {
 
-  private clientIdUrl = Globals.ServiceDomain + '/google/client-id';
-  private logoutUrl = 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=' + Globals.ThisDomain;
+  private clientIdUrl = environment.apiUrl + '/google/client-id';
+  private logoutUrl = 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=' + environment.thisUrl;
   private verifyTokenUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=';
 
   private user: User;

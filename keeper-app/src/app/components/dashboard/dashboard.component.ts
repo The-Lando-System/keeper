@@ -10,10 +10,10 @@ import { NotesService, Note } from '../../services/notes.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private user: User;
-  private notes: Note[] = [];
-  private filteredNotes: Note[] = [];
-  private filterTerm: string;
+  user: User;
+  notes: Note[] = [];
+  filteredNotes: Note[] = [];
+  filterTerm: string;
 
   constructor(
     private notesService: NotesService,

@@ -1,12 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { RequestService } from './request.service';
-import { Globals } from '../globals';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class NotesService implements OnInit {
 
-  private notesEndpoint: string = `${Globals.ServiceDomain}/notes`;
+  private notesEndpoint: string = `${environment.apiUrl}/notes`;
 
   constructor(
     private authService: AuthService,

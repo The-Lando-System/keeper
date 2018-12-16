@@ -9,7 +9,7 @@ import { Broadcaster } from 'src/app/services/broadcaster';
 })
 export class NavbarComponent implements OnInit {
 
-  private user: User;
+  user: User;
 
   constructor(
     private authService: AuthService,

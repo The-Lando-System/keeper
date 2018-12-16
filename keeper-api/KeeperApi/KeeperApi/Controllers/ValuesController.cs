@@ -13,15 +13,22 @@ namespace KeeperApi.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ValuesController : ApiController
     {
-        [Route("")]
+        [Route("auth")]
         [HttpGet]
         [AuthFilter]
-        public IHttpActionResult Get()
+        public IHttpActionResult GetAuthEndpoint()
         {
             string userEmail = Request.Headers.GetValues(Constants.UserEmailHeader).FirstOrDefault();
 
             return Ok(userEmail);
         }
-      
+
+        [Route("no-auth")]
+        [HttpGet]
+        public IHttpActionResult GetNoAuthEndpoint()
+        {
+            return Ok("No auth endpoint success");
+        }
+
     }
 }

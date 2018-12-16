@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "startProd": "tsc && lite-server -c my-bs-config.json --push-state",
     "build": "ng build",
+    "deploy": "bash deploy.sh",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
   },
@@ -23,9 +23,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
-    "concurrently": "^4.1.0",
     "core-js": "^2.5.4",
-    "lite-server": "^2.4.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"

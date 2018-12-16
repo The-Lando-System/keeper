@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="debug.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

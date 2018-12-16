@@ -16,7 +16,7 @@ namespace KeeperApi.Controllers
         [HttpGet]
         public IHttpActionResult GetClientId ()
         {
-            string clientId = Environment.GetEnvironmentVariable(ConfigurationManager.AppSettings["GoogleClientId"]);
+            string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
 
             if (string.IsNullOrEmpty(clientId))
             {

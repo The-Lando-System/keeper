@@ -10,9 +10,9 @@ import { NotesService, Note } from '../../services/notes.service';
 })
 export class NoteComponent implements OnInit {
 
-  private user: User;
-  private note: Note = new Note();
-  private editMode: boolean = false;
+  user: User;
+  note: Note = new Note();
+  editMode: boolean = false;
 
   constructor(
     private notesService: NotesService,
