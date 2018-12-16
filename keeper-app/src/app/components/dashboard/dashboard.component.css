@@ -25,3 +25,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.loading-spinner {
+  background-image: url('src/assets/loading-spinner.gif');
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}

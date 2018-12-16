@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   notes: Note[] = [];
   filteredNotes: Note[] = [];
   filterTerm: string;
+  loading: boolean = false;
 
   constructor(
     private notesService: NotesService,
@@ -31,8 +32,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getNotes(): void {
+    this.loading = true;
     this.notesService.getAllNotes().then((notes) => {
       this.notes = this.filteredNotes = notes;
+      this.loading = false;
     });
   }
 
