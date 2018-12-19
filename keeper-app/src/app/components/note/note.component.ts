@@ -13,6 +13,9 @@ export class NoteComponent implements OnInit {
   user: User;
   note: Note = new Note();
   editMode: boolean = false;
+  allTags: string[] = ['books','notes','shopping'];
+  selectedTag: string = '';
+  tags: string[] = [];
 
   constructor(
     private notesService: NotesService,
@@ -75,5 +78,11 @@ export class NoteComponent implements OnInit {
     }
 
   }
+
+  addTag(): void {
+    this.tags.push(this.selectedTag);
+    this.selectedTag = '';
+  }
+
 
 }

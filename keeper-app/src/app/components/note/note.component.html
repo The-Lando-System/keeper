@@ -17,6 +17,20 @@
           <textarea rows="5" matInput placeholder="Content" [(ngModel)]="note.Content"></textarea>
         </mat-form-field>
       </div>
+      <mat-form-field>
+        <input type="text" placeholder="Tags" aria-label="Number" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let tag of allTags" [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button id="add-tag-button" mat-raised-button (click)="addTag()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div class="full-width">
+        <div *ngFor="let tag of tags" class="tag">{{tag}}</div>
+      </div>
       <mat-card-actions>
         <button mat-button (click)="cancelOrDeleteNote()">{{editMode ? 'Delete' : 'Cancel' }}</button>
         <button id="save-note-button" mat-raised-button color="primary" (click)="createOrUpdateNote()">{{editMode ? 'Save' : 'Create'}}</button>

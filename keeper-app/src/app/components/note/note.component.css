@@ -9,3 +9,17 @@
 #note-editor-container {
   margin-top:20px;
 }
+
+#add-tag-button {
+  margin-left: 20px;
+}
+
+.tag {
+  background-color: #a7a7a7;
+  border-radius: 50px;
+  color: white;
+  padding: 8px;
+  margin: 5px;
+  width: fit-content;
+  display: inline-block;
+}
