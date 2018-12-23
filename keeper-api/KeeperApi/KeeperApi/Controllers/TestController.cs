@@ -9,9 +9,9 @@ using System.Web.Http.Cors;
 
 namespace KeeperApi.Controllers
 {
-    [RoutePrefix("values")]
+    [RoutePrefix("test")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ValuesController : ApiController
+    public class TestController : ApiController
     {
         [Route("auth")]
         [HttpGet]

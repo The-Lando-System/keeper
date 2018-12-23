@@ -15,11 +15,16 @@
 }
 
 .tag {
-  background-color: #a7a7a7;
+  background-color: #51b9ff;
   border-radius: 50px;
   color: white;
-  padding: 8px;
+  padding: 2px 8px 2px 8px;
   margin: 5px;
   width: fit-content;
   display: inline-block;
+}
+
+.remove-tag-button {
+  cursor: pointer;
+  vertical-align: middle;
 }

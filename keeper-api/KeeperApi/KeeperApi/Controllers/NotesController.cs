@@ -1,10 +1,8 @@
 ﻿using KeeperApi.Filters;
 using KeeperApi.Models;
 using KeeperApi.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -39,7 +37,7 @@ namespace KeeperApi.Controllers
         public IHttpActionResult GetAllNotes()
         {
             string userEmail = Request.Headers.GetValues(Constants.UserEmailHeader).FirstOrDefault();
-            return Ok(notesRepository.FindAllByProperty(new Dictionary<string, string>{{ "Email", userEmail }}));
+            return Ok(notesRepository.FindAllUserNotes(userEmail));
         }
 
         [Route("")]
@@ -96,5 +94,21 @@ namespace KeeperApi.Controllers
             return Ok(notesRepository.Update(editedNote.Id, editedNote));
         }
 
+        [Route("all-tags")]
+        [HttpGet]
+        [AuthFilter]
+        public IHttpActionResult GetAllTags()
+        {
+            string userEmail = Request.Headers.GetValues(Constants.UserEmailHeader).FirstOrDefault();
+
+            List<Note> notes = notesRepository.FindAllUserNotes(userEmail).ToList();
+            List<Tag> tags = new List<Tag>();
+            foreach (Note note in notes)
+            {
+                tags.AddRange(note.Tags);
+            }
+
+            return Ok(tags.Distinct(new TagComparer()));
+        }
     }
 }

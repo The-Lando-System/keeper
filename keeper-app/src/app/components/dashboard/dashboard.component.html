@@ -17,7 +17,7 @@
   <div *ngIf="loading" class="loading-spinner"></div>
   <div class="col-md-3 note-card" *ngFor="let note of filteredNotes">
     <mat-card>
-      <div>
+      <div class="note-details">
         <mat-card-header>
           <mat-card-title>{{note.Title}}</mat-card-title>
           <mat-card-subtitle>{{note.Content}}</mat-card-subtitle>
@@ -36,6 +36,11 @@
               <span>Delete</span>
             </button>
           </mat-menu>
+        </div>
+      </div>
+      <div class="tags">
+        <div *ngFor="let tag of note.Tags; index as i" class="tag">
+          {{tag.Name}}
         </div>
       </div>
     </mat-card>

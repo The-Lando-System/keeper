@@ -35,6 +35,9 @@ export class NotesService implements OnInit {
     return this.requestService.delete(`${this.notesEndpoint}/${id}`, this.authService.createAuthHeaders());
   }
 
+  getAllTags(): Promise<Tag[]> {
+    return this.requestService.get(`${this.notesEndpoint}/all-tags`, this.authService.createAuthHeaders());
+  }
 }
 
 export class Note {
@@ -44,5 +47,13 @@ export class Note {
 
   public Title: string;
   public Content: string;
+  public Tags: Tag[] = [];
+}
 
+export class Tag {
+  public Name: string;
+
+  constructor(name:string){
+    this.Name = name;
+  }
 }

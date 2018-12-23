@@ -10,15 +10,33 @@
   margin-top: 20px;
 }
 
-.note-card > mat-card > div {
+.note-card > mat-card {
+  height: 230px;
+}
+
+.note-card > mat-card > .note-details {
   display: flex;
   justify-content: space-between;
 }
 
-.note-card > mat-card > div > mat-card-header {
-  height: 200px;
+mat-card-subtitle,
+mat-card-title {
+  max-width: 160px;
+}
+
+.note-card > mat-card > .note-details > mat-card-header {
+  max-height: 140px;
+  min-height: 140px;
   overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.note-card > mat-card > .tags {
+  margin-top: 10px;
   overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  padding-bottom: 5px;
 }
 
 .command-row {
@@ -31,4 +49,14 @@
   height: 200px;
   width: 200px;
   margin: auto;
+}
+
+.tag {
+  background-color: #51b9ff;
+  border-radius: 50px;
+  color: white;
+  padding: 2px 8px 2px 8px;
+  margin: 5px;
+  width: fit-content;
+  display: inline-block;
 }

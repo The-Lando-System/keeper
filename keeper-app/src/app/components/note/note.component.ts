@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService, User } from '../../services/auth.service';
-import { NotesService, Note } from '../../services/notes.service';
+import { NotesService, Note, Tag } from '../../services/notes.service';
 
 @Component({
   selector: 'note',
@@ -13,9 +13,8 @@ export class NoteComponent implements OnInit {
   user: User;
   note: Note = new Note();
   editMode: boolean = false;
-  allTags: string[] = ['books','notes','shopping'];
-  selectedTag: string = '';
-  tags: string[] = [];
+  allTags: Tag[] = [];
+  selectedTag: Tag = new Tag('');
 
   constructor(
     private notesService: NotesService,
@@ -44,6 +43,11 @@ export class NoteComponent implements OnInit {
         this.note = new Note();
         this.editMode = false;
       }
+    });
+
+    this.notesService.getAllTags()
+    .then((tags:Tag[]) => {
+      this.allTags = tags;
     });
   }
 
@@ -80,9 +84,20 @@ export class NoteComponent implements OnInit {
   }
 
   addTag(): void {
-    this.tags.push(this.selectedTag);
-    this.selectedTag = '';
+    if (this.selectedTag.Name.trim() === '') return;
+    
+    for (let tag of this.note.Tags) {
+      if (tag.Name === this.selectedTag.Name) {
+        return;
+      }
+    }
+
+    this.note.Tags.push(this.selectedTag);
+    this.selectedTag = new Tag('');
   }
 
+  removeTag(i:number): void {
+    this.note.Tags.splice(i,1);
+  }
 
 }

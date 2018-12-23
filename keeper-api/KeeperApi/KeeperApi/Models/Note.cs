@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Web;
 using MongoOrm;
 
 namespace KeeperApi.Models
@@ -18,5 +15,8 @@ namespace KeeperApi.Models
 
         [DataMember]
         public string Email { get; set; }
+
+        [DataMember]
+        public List<Tag> Tags { get; set; } = new List<Tag>();
     }
 }

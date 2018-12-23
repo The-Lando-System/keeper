@@ -18,10 +18,10 @@
         </mat-form-field>
       </div>
       <mat-form-field>
-        <input type="text" placeholder="Tags" aria-label="Number" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag">
+        <input type="text" placeholder="Tags" aria-label="Number" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag.Name">
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let tag of allTags" [value]="tag">
-            {{tag}}
+          <mat-option *ngFor="let tag of allTags" [value]="tag.Name">
+            {{tag.Name}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -29,7 +29,10 @@
         <mat-icon>add</mat-icon>
       </button>
       <div class="full-width">
-        <div *ngFor="let tag of tags" class="tag">{{tag}}</div>
+        <div *ngFor="let tag of note.Tags; index as i" class="tag">
+          {{tag.Name}}
+          <mat-icon class="remove-tag-button" (click)="removeTag(i)">remove</mat-icon>
+        </div>
       </div>
       <mat-card-actions>
         <button mat-button (click)="cancelOrDeleteNote()">{{editMode ? 'Delete' : 'Cancel' }}</button>
