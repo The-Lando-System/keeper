@@ -15,15 +15,10 @@
 }
 
 .note-card > mat-card {
-  height: 230px;
+  height: 250px;
 }
 
-.note-card > mat-card > .note-details {
-  display: flex;
-  justify-content: space-between;
-}
-
-.note-card > mat-card > .note-details > mat-card-header {
+.note-card > mat-card > mat-card-header {
   max-height: 140px;
   min-height: 140px;
   overflow-y: hidden;
@@ -36,6 +31,7 @@
   overflow-y: hidden;
   display: flex;
   padding-bottom: 5px;
+  height: 60px;
 }
 
 .command-row {
@@ -57,5 +53,12 @@
   padding: 2px 8px 2px 8px;
   margin: 5px;
   width: fit-content;
+  height: fit-content;
   display: inline-block;
+}
+
+.last-modified {
+  font-style: italic;
+  color: grey;
+  font-size: small;
 }

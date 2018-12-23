@@ -11,7 +11,8 @@ namespace KeeperApi.Repositories
     {
         public IEnumerable<Note> FindAllUserNotes(string email)
         {
-            return FindAllByProperty(new Dictionary<string, string> {{ "Email", email }});
+            return FindAllByProperty(new Dictionary<string, string> {{ "Email", email }})
+                .OrderByDescending(note => note.LastModified);
         }
     }
 }

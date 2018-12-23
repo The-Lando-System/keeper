@@ -107,4 +107,9 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  getLastModifiedString(dateString:string): string {
+    let date = new Date(dateString); 
+    return `${date.toLocaleTimeString('en-US')} - ${date.toLocaleDateString('en-US')}`;
+  }
+
 }

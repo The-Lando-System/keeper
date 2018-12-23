@@ -23,33 +23,17 @@
 <div id="list-of-notes" class="row">
   <div *ngIf="loading" class="loading-spinner"></div>
   <div class="col-md-3 note-card" *ngFor="let note of filteredNotes">
-    <mat-card>
-      <div class="note-details">
-        <mat-card-header>
-          <mat-card-title>{{note.Title}}</mat-card-title>
-          <mat-card-subtitle>{{note.Content}}</mat-card-subtitle>
-        </mat-card-header>
-        <div class="note-context-menu">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['note/', note.Id]">
-              <mat-icon>edit</mat-icon>
-              <span>Edit</span>
-            </button>
-            <button mat-menu-item (click)="deleteNote(note)">
-              <mat-icon>delete</mat-icon>
-              <span>Delete</span>
-            </button>
-          </mat-menu>
-        </div>
-      </div>
+    <mat-card [routerLink]="['note/', note.Id]">
+      <mat-card-header>
+        <mat-card-title>{{note.Title}}</mat-card-title>
+        <mat-card-subtitle>{{note.Content}}</mat-card-subtitle>
+      </mat-card-header>
       <div class="tags">
         <div *ngFor="let tag of note.Tags; index as i" class="tag">
           {{tag.Name}}
         </div>
       </div>
+      <div class="last-modified">{{getLastModifiedString(note.LastModified)}}</div>
     </mat-card>
   </div>
 </div>
