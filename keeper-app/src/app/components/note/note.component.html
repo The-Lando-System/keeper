@@ -18,7 +18,7 @@
         </mat-form-field>
       </div>
       <mat-form-field>
-        <input type="text" placeholder="Tags" aria-label="Number" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag.Name">
+        <input type="text" placeholder="Tags" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag.Name">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let tag of allTags" [value]="tag.Name">
             {{tag.Name}}

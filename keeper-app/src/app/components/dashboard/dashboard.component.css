@@ -2,8 +2,12 @@
   margin-top:20px;
 }
 
-#note-filter {
-  width: 300px;
+#text-filter {
+  width: 40%;
+}
+
+#tag-filter {
+  width: 30%;
 }
 
 .note-card {
@@ -17,11 +21,6 @@
 .note-card > mat-card > .note-details {
   display: flex;
   justify-content: space-between;
-}
-
-mat-card-subtitle,
-mat-card-title {
-  max-width: 160px;
 }
 
 .note-card > mat-card > .note-details > mat-card-header {

@@ -1,8 +1,15 @@
-<!-- Create Note -->
+<!-- Command Row -->
 <div class="row">
   <div class="col command-row">
-    <mat-form-field id="note-filter">
+    <mat-form-field id="text-filter">
       <input matInput placeholder="Search" [(ngModel)]="filterTerm" (keyup)="filterNotes()">
+    </mat-form-field>
+    <mat-form-field id="tag-filter">
+      <mat-select placeholder="Tags" [(ngModel)]="selectedTag.Name" (selectionChange)="filterNotes()">
+        <mat-option *ngFor="let tag of allTags" [(value)]="tag.Name">
+          {{tag.Name}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <button mat-fab color="primary" id="new-note-button" [routerLink]="['note/new']">
       <mat-icon>add</mat-icon>

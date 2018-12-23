@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '../../services/auth.service';
-import { NotesService, Note } from '../../services/notes.service';
+import { NotesService, Note, Tag } from '../../services/notes.service';
 
 @Component({
   selector: 'dashboard',
@@ -13,7 +13,9 @@ export class DashboardComponent implements OnInit {
   user: User;
   notes: Note[] = [];
   filteredNotes: Note[] = [];
-  filterTerm: string;
+  filterTerm: string = '';
+  allTags: Tag[] = [];
+  selectedTag: Tag = new Tag('');
   loading: boolean = false;
 
   constructor(
@@ -28,6 +30,11 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/']);
     } else {
       this.getNotes();
+      this.notesService.getAllTags()
+      .then((tags:Tag[]) => {
+        this.allTags = tags;
+        this.allTags.unshift(new Tag(""));
+      });
     }
   }
 
@@ -41,19 +48,48 @@ export class DashboardComponent implements OnInit {
 
   filterNotes(): void {
 
-    if (this.filterTerm.trim() === ''){
+    let filterTerm = this.filterTerm.toLowerCase().trim();
+    let filterTag = this.selectedTag.Name.trim();
+
+    if (filterTerm === '' && filterTag === ''){
       this.filteredNotes = this.notes;
       return;
     }
 
     this.filteredNotes = this.notes.filter(note => {
 
-      let term = this.filterTerm.toLowerCase();
-      
-      let title = note.Title ? note.Title.toLowerCase() : '';
-      let content = note.Content ? note.Content.toLowerCase() : '';
+      let filterOnText = false;
 
-      return title.includes(term) || content.includes(term);
+      if (filterTerm !== '') {
+        let title = note.Title ? note.Title.toLowerCase() : '';
+        let content = note.Content ? note.Content.toLowerCase() : '';
+        let tags = '';
+        if (note.Tags && note.Tags.length > 0){
+          tags = note.Tags.map(tag => tag.Name).reduce(tagName => tagName.toLowerCase() + ' ');
+        }
+        filterOnText = title.includes(filterTerm) || content.includes(filterTerm) || tags.includes(filterTerm);
+      }
+      
+      let filterOnTag = false;
+
+      if (filterTag !== '') {
+        for (let tag of note.Tags) {
+          if (tag.Name === filterTag) {
+            filterOnTag = true;
+            break;
+          }
+        }
+      }
+
+      if (filterTerm === '') {
+        return filterOnTag;
+      }
+
+      if (filterTag === '') {
+        return filterOnText;
+      }
+
+      return filterOnText && filterOnTag;
     });
   }
 
