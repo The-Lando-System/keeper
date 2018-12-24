@@ -99,13 +99,18 @@ export class NoteComponent implements OnInit {
   }
 
   addTag(): void {
-    if (this.selectedTag.Name.trim() === '') return;
+
+    let tagName = this.selectedTag.Name.trim();
+
+    if (tagName === '') return;
     
     for (let tag of this.note.Tags) {
-      if (tag.Name === this.selectedTag.Name) {
+      if (tag.Name === tagName) {
         return;
       }
     }
+
+    this.selectedTag.Name = tagName;
 
     this.note.Tags.push(this.selectedTag);
     this.selectedTag = new Tag('');

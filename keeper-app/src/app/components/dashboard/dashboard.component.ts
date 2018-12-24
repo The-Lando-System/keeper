@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
 
       if (filterTag !== '') {
         for (let tag of note.Tags) {
-          if (tag.Name === filterTag) {
+          if (tag.Name.trim() === filterTag) {
             filterOnTag = true;
             break;
           }
