@@ -17,20 +17,27 @@
 <!-- List of Notes -->
 <div id="list-of-notes" class="row">
   <div *ngIf="loading" class="loading-spinner"></div>
-  <div class="col-md-4 note-card" *ngFor="let note of filteredNotes">
-    <mat-card [routerLink]="['note/', note.Id]">
-      <mat-card-header>
-        <mat-card-title>{{note.Title}}</mat-card-title>
-        <mat-card-subtitle>{{note.Content}}</mat-card-subtitle>
-      </mat-card-header>
-      <div class="tags">
-        <div *ngFor="let tag of note.Tags; index as i" class="tag">
-          {{tag.Name}}
+  <ng-container *ngIf="!loading">
+    <div class="col-md-4 note-card" *ngFor="let note of filteredNotes">
+      <mat-card [routerLink]="['note/', note.Id]">
+        <div class="title-row">
+          <mat-card-header>
+            <mat-card-title>{{note.Title}}</mat-card-title>
+            <mat-card-subtitle>{{note.Content}}</mat-card-subtitle>
+          </mat-card-header>
+          <button mat-button class="delete-button" (click)="deleteNote(note)">
+            <mat-icon>close</mat-icon>
+          </button>
         </div>
-      </div>
-      <div class="last-modified">{{getLastModifiedString(note.LastModified)}}</div>
-    </mat-card>
-  </div>
+        <div class="tags">
+          <div *ngFor="let tag of note.Tags; index as i" class="tag">
+            {{tag.Name}}
+          </div>
+        </div>
+        <div class="last-modified">{{getLastModifiedString(note.LastModified)}}</div>
+      </mat-card>
+    </div>
+  </ng-container>
 </div>
 
 <button mat-fab color="primary" id="new-note-button" [routerLink]="['note/new']">

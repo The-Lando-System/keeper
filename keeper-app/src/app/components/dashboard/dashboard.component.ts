@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     this.notesService.getAllNotes().then((notes) => {
       this.notes = this.filteredNotes = notes;
+      this.filterNotes();
       this.loading = false;
     });
   }
@@ -95,6 +96,8 @@ export class DashboardComponent implements OnInit {
 
   deleteNote(note:Note): void {
 
+    event.stopPropagation();
+
     if (!confirm("Are you sure you want to delete this note?")){
       return;
     }
@@ -102,7 +105,6 @@ export class DashboardComponent implements OnInit {
     this.notesService.deleteNote(note.Id)
     .then(() => {
       this.getNotes();
-      this.filterTerm = '';
     });
 
   }

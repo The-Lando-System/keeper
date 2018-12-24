@@ -15,6 +15,7 @@ export class NoteComponent implements OnInit {
   editMode: boolean = false;
   allTags: Tag[] = [];
   selectedTag: Tag = new Tag('');
+  loading: boolean = false;
 
   constructor(
     private notesService: NotesService,
@@ -32,13 +33,7 @@ export class NoteComponent implements OnInit {
     this.activatedRoute.params.forEach((params: Params) => {
       let noteId = params['id'];
       if (noteId !== 'new') {
-        this.notesService.getNoteById(noteId)
-        .then((note:Note) => {
-          this.note = note;
-          this.editMode = true;
-        }).catch(() => {
-          this.router.navigate(['/']);
-        });
+        this.getNoteById(noteId);
       } else {
         this.note = new Note();
         this.editMode = false;
@@ -51,35 +46,55 @@ export class NoteComponent implements OnInit {
     });
   }
 
+  getNoteById(id:string): void {
+
+    this.loading = true;
+
+    this.notesService.getNoteById(id)
+    .then((note:Note) => {
+      this.note = note;
+      this.editMode = true;
+      this.loading = false;
+    }).catch(() => {
+      this.router.navigate(['/']);
+    });
+  }
+
   createOrUpdateNote(): void {
+
+    this.loading = true;
 
     if (this.editMode) {
       this.notesService.editNote(this.note)
       .then((note:Note) => {
+        this.router.navigate(['/']);
+      }).catch((err) => {
         this.router.navigate(['/']);
       });
     } else {
       this.notesService.createNote(this.note)
       .then((note:Note) => {
         this.router.navigate(['/']);
-      });
-    }
-
-  }
-
-  cancelOrDeleteNote(): void {
-
-    if (this.editMode) {
-      if (!confirm("Are you sure you want to delete this note?")){
-        return;
-      }
-      this.notesService.deleteNote(this.note.Id)
-      .then(() => {
+      }).catch((err) => {
         this.router.navigate(['/']);
       });
-    } else {
-      this.router.navigate(['/']);
     }
+  }
+
+  deleteNote(): void {
+
+    if (!confirm("Are you sure you want to delete this note?")){
+      return;
+    }
+
+    this.loading = true;
+
+    this.notesService.deleteNote(this.note.Id)
+    .then(() => {
+      this.router.navigate(['/']);
+    }).catch((err) => {
+      this.router.navigate(['/']);
+    });
 
   }
 
@@ -98,6 +113,11 @@ export class NoteComponent implements OnInit {
 
   removeTag(i:number): void {
     this.note.Tags.splice(i,1);
+  }
+
+  getLastModifiedString(dateString:string): string {
+    let date = new Date(dateString); 
+    return `${date.toLocaleTimeString('en-US')} - ${date.toLocaleDateString('en-US')}`;
   }
 
 }

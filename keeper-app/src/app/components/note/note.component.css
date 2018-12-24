@@ -28,3 +28,18 @@
   cursor: pointer;
   vertical-align: middle;
 }
+
+.loading-spinner {
+  background-image: url('src/assets/loading-spinner.gif');
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}
+
+.last-modified {
+  font-style: italic;
+  color: grey;
+  font-size: small;
+  text-align: right;
+  margin-bottom: -10px;
+}

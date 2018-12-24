@@ -14,18 +14,18 @@
   margin-top: 20px;
 }
 
-.note-card > mat-card {
+mat-card {
   height: 250px;
 }
 
-.note-card > mat-card > mat-card-header {
+mat-card-header {
   max-height: 140px;
   min-height: 140px;
   overflow-y: hidden;
   overflow-x: hidden;
 }
 
-.note-card > mat-card > .tags {
+.tags {
   margin-top: 10px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -34,9 +34,15 @@
   height: 60px;
 }
 
-.command-row {
+.command-row,
+.title-row {
   display: flex;
   justify-content: space-between;
+}
+
+.delete-button {
+  height: 40px;
+  margin-right: -10px;
 }
 
 .loading-spinner {
@@ -75,4 +81,10 @@
   height: 80px;
   width: 80px;
   z-index: 9999;
+}
+
+#new-note-button mat-icon {
+  height: 40px;
+  width: 40px;
+  font-size: 36px;
 }
