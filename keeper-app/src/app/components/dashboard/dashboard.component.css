@@ -7,7 +7,7 @@
 }
 
 #tag-filter {
-  width: 30%;
+  width: 40%;
 }
 
 .note-card {
@@ -61,4 +61,18 @@
   font-style: italic;
   color: grey;
   font-size: small;
+}
+
+#command-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+#new-note-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  height: 80px;
+  width: 80px;
+  z-index: 9999;
 }
