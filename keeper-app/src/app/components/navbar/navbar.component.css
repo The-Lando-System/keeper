@@ -2,16 +2,23 @@
   flex: 1 1 auto;
 }
 
-.app-title {
-  margin-left: 10px;
-  cursor: pointer;
-  outline: 0;
-}
-
 .mat-toolbar-single-row {
   height: 64px!important;
 }
 
 #logout-button {
+  margin-left: 20px;
+}
+
+#brand {
+  cursor: pointer;
+  outline: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#brand-image {
+  height: 30px;
+  margin-right: 10px;
   margin-left: 20px;
 }

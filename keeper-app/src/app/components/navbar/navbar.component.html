@@ -1,13 +1,24 @@
 <mat-toolbar class="top-toolbar">
-  <h1 class="app-title" routerLink="/">Keeper</h1>
+  <div id="brand" routerLink="/">
+    <img id="brand-image" src="keeper-brand.png"/>
+    <h1>Keeper</h1>
+  </div>
   <span class="spacer"></span>
   <div *ngIf="!user">
     <button mat-raised-button color="primary" (click)="login()">Login</button>
   </div>
-  <div *ngIf="user">
-    <h4>{{user.name}}</h4>
-  </div>
-  <div *ngIf="user"  id="logout-button">
-    <button mat-raised-button (click)="logout()">Logout</button>
+  <div *ngIf="user" id="top-menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>
+        <span>{{user.name}}</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>person_outline</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>

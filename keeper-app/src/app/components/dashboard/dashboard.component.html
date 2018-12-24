@@ -17,7 +17,7 @@
 <!-- List of Notes -->
 <div id="list-of-notes" class="row">
   <div *ngIf="loading" class="loading-spinner"></div>
-  <div class="col-md-3 note-card" *ngFor="let note of filteredNotes">
+  <div class="col-md-4 note-card" *ngFor="let note of filteredNotes">
     <mat-card [routerLink]="['note/', note.Id]">
       <mat-card-header>
         <mat-card-title>{{note.Title}}</mat-card-title>
