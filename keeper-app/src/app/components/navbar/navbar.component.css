@@ -18,7 +18,11 @@
 }
 
 #brand-image {
+  background-image: url("src/assets/keeper-brand.png");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
   height: 30px;
+  width: 30px;
   margin-right: 10px;
   margin-left: 20px;
 }
