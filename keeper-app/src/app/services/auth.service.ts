@@ -24,31 +24,42 @@ export class AuthService {
 
     return new Promise((resolve,reject) => {
 
-      // First see if we have user/token data in local storage
-      this.user = this.getUser();
-      this.accessToken = this.getAccessToken();
-      this.idToken = this.getIdToken();
-
-      // Start from a clean slate if we don't have this data
-      if (!this.user || !this.accessToken || !this.idToken) {
-        this.clearUserData();
-        reject();
-        return;
-      }
-
       // Get the Google client ID and proceed to token verification
       this.getClientId()
       .then(() => {
-        
-        // Attempt to verify the stored id-token. Clear out the user if this fails
-        this.verifyToken(this.idToken)
-        .then(() => {
+
+        // First see if we have user/token data in local storage
+        this.user = this.getUser();
+        this.accessToken = this.getAccessToken();
+        this.idToken = this.getIdToken();
+
+        // Start from a clean slate if we don't have this data
+        if (!this.user || !this.accessToken || !this.idToken) {
+          this.clearUserData();
           resolve();
           return;
+        }
+        
+        // Attempt to refresh the id-token
+        this.refreshToken()
+        .then(() => {
+
+          // Attempt to verify the stored id-token. Clear out the user if this fails
+          this.verifyToken(this.idToken)
+          .then(() => {
+            resolve();
+            return;
+          })
+          .catch(() => {
+            this.clearUserData();
+            resolve();
+            return;
+          });
+
         })
         .catch(() => {
           this.clearUserData();
-          reject();
+          resolve();
           return;
         });
 
@@ -111,6 +122,23 @@ export class AuthService {
   }
 
   // Helper methods ===============================
+
+  private refreshToken(): Promise<any> {
+    return new Promise((resolve,reject) => {
+
+      this.loadGoogleAuth()
+      .then(() => {
+
+        gapi.auth2.getAuthInstance().currentUser.get()
+        .reloadAuthResponse().then((authResponse) => {
+          this.idToken = authResponse.id_token;
+          resolve();
+        }, () => reject());
+
+      }).catch(() => reject());
+
+    });
+  }
 
   private verifyToken(token:string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -219,11 +247,19 @@ export class AuthService {
     localStorage.setItem('id_token', this.idToken);
   }
 
-  private getClientId(): Promise<any> {
-    return this.http.get(this.clientIdUrl)
-      .toPromise()
-      .then((clientId:string) => this.googleClientId = clientId)
-      .catch(err => console.log(err));
+  private getClientId(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      return this.http.get(this.clientIdUrl)
+        .toPromise()
+        .then((clientId:string) => {
+          this.googleClientId = clientId;
+          resolve();
+        })
+        .catch(err => {
+          console.error(err);
+          reject();
+        });
+    });
   }
 
 }

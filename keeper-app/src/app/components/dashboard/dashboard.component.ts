@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
   filterTerm: string = '';
   allTags: Tag[] = [];
   selectedTag: Tag = new Tag('');
+  filterTags: Tag[] = [];
   loading: boolean = false;
+  error: string = '';
 
   constructor(
     private notesService: NotesService,
@@ -25,17 +27,25 @@ export class DashboardComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
+
     this.user = this.authService.getUser();
     if (!this.user) {
       this.router.navigate(['/']);
     } else {
       this.getNotes();
-      this.notesService.getAllTags()
-      .then((tags:Tag[]) => {
-        this.allTags = tags;
-        this.allTags.unshift(new Tag(""));
-      });
+      this.getTags();
     }
+  }
+
+  getTags(): void {
+    this.notesService.getAllTags()
+    .then((tags:Tag[]) => {
+      this.allTags = tags;
+      this.allTags.unshift(new Tag(""));
+    }).catch(() => {
+      this.loading = false;
+      this.error = 'Encountered error retrieving tags...';
+    });
   }
 
   getNotes(): void {
@@ -44,15 +54,17 @@ export class DashboardComponent implements OnInit {
       this.notes = this.filteredNotes = notes;
       this.filterNotes();
       this.loading = false;
+    }).catch(() => {
+      this.loading = false;
+      this.error = 'Encountered error retrieving notes...';
     });
   }
 
   filterNotes(): void {
 
     let filterTerm = this.filterTerm.toLowerCase().trim();
-    let filterTag = this.selectedTag.Name.trim();
 
-    if (filterTerm === '' && filterTag === ''){
+    if (filterTerm === '' && this.filterTags.length === 0){
       this.filteredNotes = this.notes;
       return;
     }
@@ -73,20 +85,23 @@ export class DashboardComponent implements OnInit {
       
       let filterOnTag = false;
 
-      if (filterTag !== '') {
-        for (let tag of note.Tags) {
-          if (tag.Name.trim() === filterTag) {
-            filterOnTag = true;
-            break;
-          }
+      if (this.filterTags.length > 0) {
+        
+        let noteContainsAllFilterTags = true;
+
+        for (let filterTag of this.filterTags) {
+          noteContainsAllFilterTags = 
+            noteContainsAllFilterTags && note.Tags.map(tag => tag.Name).includes(filterTag.Name);
         }
+
+        filterOnTag = noteContainsAllFilterTags;
       }
 
       if (filterTerm === '') {
         return filterOnTag;
       }
 
-      if (filterTag === '') {
+      if (this.filterTags.length === 0) {
         return filterOnText;
       }
 
@@ -105,6 +120,8 @@ export class DashboardComponent implements OnInit {
     this.notesService.deleteNote(note.Id)
     .then(() => {
       this.getNotes();
+    }).catch(() => {
+      this.error = 'Encountered error deleting note...';
     });
 
   }
@@ -112,6 +129,22 @@ export class DashboardComponent implements OnInit {
   getLastModifiedString(dateString:string): string {
     let date = new Date(dateString); 
     return `${date.toLocaleTimeString('en-US')} - ${date.toLocaleDateString('en-US')}`;
+  }
+
+  addTagFilter(tag:Tag): void {
+    let tagName = tag.Name.trim();
+    
+    this.selectedTag.Name = '';
+
+    if (tagName !== '') {
+      this.filterTags.push(new Tag(tagName));
+      this.filterNotes();
+    }
+  }
+
+  removeFilterTag(i:number): void {
+    this.filterTags.splice(i,1);
+    this.filterNotes();
   }
 
 }

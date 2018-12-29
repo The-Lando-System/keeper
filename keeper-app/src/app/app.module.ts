@@ -21,8 +21,13 @@ import { NotesService } from './services/notes.service';
 
 import { StartupService } from './services/startup.service';
 
+declare const APP_INIT_ERROR: any;
+
 export function startupServiceFactory(startupService: StartupService): Function {
-  return () => startupService.load();
+  return () => startupService.load().then(() => null).catch(() => {
+    console.error("Failed to initialize the app");
+    APP_INIT_ERROR.state = true;
+  });
 }
 
 @NgModule({

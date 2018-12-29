@@ -4,10 +4,10 @@
     <h1>Keeper</h1>
   </div>
   <span class="spacer"></span>
-  <div *ngIf="!user">
+  <div *ngIf="!user && !error">
     <button mat-raised-button color="primary" (click)="login()">Login</button>
   </div>
-  <div *ngIf="user" id="top-menu">
+  <div *ngIf="user && !error" id="top-menu">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>

@@ -25,13 +25,16 @@ mat-card-header {
   overflow-x: hidden;
 }
 
-.tags {
+mat-card > .tags {
+  height: 60px;
+  padding-bottom: 5px;
   margin-top: 10px;
+}
+
+.tags {
   overflow-x: auto;
   overflow-y: hidden;
   display: flex;
-  padding-bottom: 5px;
-  height: 60px;
 }
 
 .command-row,
@@ -52,8 +55,14 @@ mat-card-header {
   margin: auto;
 }
 
+.error-text {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}
+
 .tag {
-  background-color: #51b9ff;
+  background-color: #80ce90;
   border-radius: 50px;
   color: white;
   padding: 2px 8px 2px 8px;
@@ -62,6 +71,10 @@ mat-card-header {
   height: fit-content;
   display: inline-block;
   white-space: nowrap;
+}
+
+.note-card .tag {
+  background-color: #51b9ff;
 }
 
 .last-modified {
@@ -88,4 +101,9 @@ mat-card-header {
   height: 40px;
   width: 40px;
   font-size: 36px;
+}
+
+.remove-tag-button {
+  cursor: pointer;
+  vertical-align: middle;
 }

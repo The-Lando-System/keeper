@@ -1,21 +1,29 @@
 <!-- Command Row -->
 <div id="command-menu">
+  <mat-form-field id="tag-filter">
+    <input type="text" placeholder="Tags" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag.Name" (keyup.enter)="addTagFilter(selectedTag)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let tag of allTags" [value]="tag.Name">
+        {{tag.Name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
   <mat-form-field id="text-filter">
     <input matInput placeholder="Search" [(ngModel)]="filterTerm" (keyup)="filterNotes()">
   </mat-form-field>
-  <mat-form-field id="tag-filter">
-    <mat-select placeholder="Tags" [(ngModel)]="selectedTag.Name" (selectionChange)="filterNotes()">
-      <mat-option *ngFor="let tag of allTags" [(value)]="tag.Name">
-        {{tag.Name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+</div>
+<div class="full-width tags">
+  <div *ngFor="let tag of filterTags; index as i" class="tag">
+    {{tag.Name}}
+    <mat-icon class="remove-tag-button" (click)="removeFilterTag(i)">remove</mat-icon>
+  </div>
 </div>
 
 <hr/>
 
 <!-- List of Notes -->
 <div id="list-of-notes" class="row">
+  <div *ngIf="error" class="error-text"><h1>{{error}}</h1></div>
   <div *ngIf="loading" class="loading-spinner"></div>
   <ng-container *ngIf="!loading">
     <div class="col-md-4 note-card" *ngFor="let note of filteredNotes">

@@ -1,8 +1,11 @@
 <div class="container">
-  <div *ngIf="!user">
+  <div *ngIf="!user && !error">
     <h1>Login to see your dashboard</h1>
   </div>
-  <div *ngIf="user">
+  <div *ngIf="user && !error">
     <dashboard></dashboard>
+  </div>
+  <div *ngIf="error">
+    <h1>Error initializing the app...</h1>
   </div>
 </div>

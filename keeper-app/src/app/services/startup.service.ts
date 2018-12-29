@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService, User } from './auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class StartupService {
@@ -8,10 +8,8 @@ export class StartupService {
     private authSvc: AuthService
   ) {}
 
-  load(): Promise<User> {
-    return this.authSvc.initUser()
-      .then(() => null)
-      .catch(() => null);
+  load(): Promise<void> {
+    return this.authSvc.initUser();
   }
 
 }
