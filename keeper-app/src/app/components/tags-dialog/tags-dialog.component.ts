@@ -9,8 +9,10 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class TagsDialog implements OnInit {
 
+  selectedTags: Tag[] = [];
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) private allTags: Tag[]
+    @Inject(MAT_DIALOG_DATA) public allTags: Tag[]
   ) {}
 
   ngOnInit(): void {
