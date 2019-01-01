@@ -1,13 +1,10 @@
 <!-- Command Row -->
 <div id="command-menu">
-  <mat-form-field id="tag-filter">
-    <input type="text" placeholder="Tags" matInput [matAutocomplete]="auto" [(ngModel)]="selectedTag.Name" (keyup.enter)="addTagFilter(selectedTag)">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let tag of allTags" [value]="tag.Name">
-        {{tag.Name}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <div id="tag-dialog-button">
+    <button mat-raised-button (click)="openTagsDialog()">
+      Tags <mat-icon>bookmark_border</mat-icon>
+    </button>
+  </div>
   <mat-form-field id="text-filter">
     <input matInput placeholder="Search" [(ngModel)]="filterTerm" (keyup)="filterNotes()">
   </mat-form-field>

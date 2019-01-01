@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NoteComponent } from './components/note/note.component';
+import { TagsDialog } from './components/tags-dialog/tags-dialog.component';
 
 import { AuthService } from './services/auth.service';
 import { Broadcaster } from './services/broadcaster';
@@ -36,7 +37,11 @@ export function startupServiceFactory(startupService: StartupService): Function 
     NavbarComponent,
     HomeComponent,
     DashboardComponent,
-    NoteComponent
+    NoteComponent,
+    TagsDialog
+  ],
+  entryComponents: [
+    TagsDialog
   ],
   imports: [
     BrowserModule,

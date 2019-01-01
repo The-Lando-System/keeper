@@ -3,11 +3,7 @@
 }
 
 #text-filter {
-  width: 40%;
-}
-
-#tag-filter {
-  width: 40%;
+  width: 70%;
 }
 
 .note-card {
@@ -86,6 +82,7 @@ mat-card > .tags {
 #command-menu {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 #new-note-button {

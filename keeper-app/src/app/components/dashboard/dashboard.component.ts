@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { AuthService, User } from '../../services/auth.service';
 import { NotesService, Note, Tag } from '../../services/notes.service';
+import { TagsDialog } from '../tags-dialog/tags-dialog.component';
 
 @Component({
   selector: 'dashboard',
@@ -23,7 +25,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private notesService: NotesService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private tagsDialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -41,7 +44,6 @@ export class DashboardComponent implements OnInit {
     this.notesService.getAllTags()
     .then((tags:Tag[]) => {
       this.allTags = tags;
-      this.allTags.unshift(new Tag(""));
     }).catch(() => {
       this.loading = false;
       this.error = 'Encountered error retrieving tags...';
@@ -119,7 +121,7 @@ export class DashboardComponent implements OnInit {
 
     this.notesService.deleteNote(note.Id)
     .then(() => {
-      this.getNotes();
+      this.ngOnInit();
     }).catch(() => {
       this.error = 'Encountered error deleting note...';
     });
@@ -147,4 +149,19 @@ export class DashboardComponent implements OnInit {
     this.filterNotes();
   }
 
+  openTagsDialog(): void {
+    const tagsDialog = this.tagsDialog.open(TagsDialog, {
+      width: '400px',
+      maxWidth: '600px',
+      maxHeight: '400px',
+      data: this.allTags
+    });
+
+    tagsDialog.afterClosed().subscribe(selectedTags => {
+      if (selectedTags && selectedTags.length > 0) {
+        this.filterTags = selectedTags;
+      }
+      this.filterNotes();
+    });
+  }
 }
