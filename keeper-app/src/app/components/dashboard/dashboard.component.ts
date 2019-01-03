@@ -153,7 +153,7 @@ export class DashboardComponent implements OnInit {
     const tagsDialog = this.tagsDialog.open(TagsDialog, {
       width: '400px',
       maxWidth: '600px',
-      maxHeight: '400px',
+      height: '450px',
       data: this.allTags
     });
 
