@@ -4,3 +4,13 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+#tag-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#tag-filter > mat-form-field{
+  width: 100%;
+}

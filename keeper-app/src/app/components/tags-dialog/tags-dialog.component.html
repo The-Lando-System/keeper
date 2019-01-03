@@ -1,8 +1,15 @@
 <h1 mat-dialog-title>Tags</h1>
 <div mat-dialog-content>
-  <mat-form-field id="text-filter">
-    <input matInput placeholder="Filter" [(ngModel)]="filterTerm" (keyup)="filterTags()">
-  </mat-form-field>
+  <div id="tag-filter">
+    <mat-form-field>
+      <input matInput placeholder="Filter" [(ngModel)]="filterTerm" (keyup)="filterTags()">
+    </mat-form-field>
+    <div>
+      <button mat-button (click)="filterTerm = ''; filterTags();">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
   <mat-selection-list id="tag-list" (selectionChange)="tagSelected($event)">
     <mat-list-option *ngFor="let tag of filteredTags" [value]="tag" [selected]="tag.selected">
       {{tag.name}}
